@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Priority Caching</title>
+</head>
+<body>
+    <div class="ps-content-wrapper-v0">
+        <p>A caching system uses 'priority' to decide what memory items are moved to the cache. All items start in the main memory with a priority of <em>0.</em> Priority of all items decrease by <em>1</em> per second, but the priority of an item is bumped up by <em>2</em> instead of being decremented at that second whenever it is accessed. The minimum priority is <em>0.</em></p>
+        
+        <ul>
+            <li>When the priority of an item exceeds <em>5,&nbsp;</em>it is moved to the cache.</li>
+            <li>When the priority of an item in cache becomes less than or equal to <em>3</em> it is moved back to the main memory.</li>
+            <li>If an item is accessed more than once in the same second, it will be incremented by <em>2 x (number of times it is accessed at that second).&nbsp;</em>
+        </li>
+        </ul>
+        
+        <p>&nbsp;</p>
+        
+        <p>&nbsp;The logs of all calls to access memory items will be provided in the format given below, not necessarily in any sorted order.</p>
+        
+        <div><code>&lt;timestamp&gt; &lt;item_id&gt;</code></div>
+        
+        <p>Return the item IDs of all items in the cache in ascending order, once the final log entry is made. If there is no item in the cache, return the array <em>[-1]</em>.</p>
+        
+        <p>&nbsp;</p>
+        
+        <p>For example, the logs are <em>callLogs = [[1, 1], [2, 1], [2, 1], [4, 2], [5, 2], [6, 2]].</em>&nbsp; Both of the items start at priority 0. In the table below, the number of times an item is accessed at a time is shown in the "access" column. An item is in the cache at the times it has an asterisk. At the end, only item 2 is in the cache. Note that at second 2, item 1 was accessed twice, so its priority increased 2 * times accessed that second = 4.</p>
+        
+        <p>&nbsp;</p>
+        
+        <pre>Time&nbsp;&nbsp;&nbsp;&nbsp;Item 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Item 2
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;access priority  access priority
+        0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0
+        1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0
+        2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2&nbsp;&nbsp;&nbsp;&nbsp;  6*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0
+        3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0
+        4&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4*&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2
+        5&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;  4
+        6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1&nbsp;&nbsp;&nbsp;&nbsp;  6*
+        </pre>
+        
+        <p>&nbsp;</p>
+        
+        <p class="section-title" data-a11y="p-s-t" role="heading" aria-level="4">Function Description</p>
+        
+        <p class="section-title">&nbsp;</p>
+        
+        <p>Complete the <em>cacheContents</em> function in the editor below. The function must return an integer array denoting the items present in the cache.</p>
+        
+        <p>&nbsp;</p>
+        
+        <p><em>cacheContents</em> has the following parameter(s):</p>
+        
+        <p>&nbsp;&nbsp;&nbsp;&nbsp;<em>callLogs: A </em>2D integer array, that denotes the logs of the calls made to memory.</p>
+        
+        <p>&nbsp;</p>
+        
+        <p class="section-title" data-a11y="p-s-t" role="heading" aria-level="4">Constraints</p>
+        
+        <ul>
+            <li><em>1 ≤ n ≤ 10<sup>5</sup></em></li>
+            <li><em>1 ≤ callLogs<sub>ij</sub>&nbsp;≤ 10<sup>3</sup></em></li>
+        </ul>
+        
+        <p>&nbsp;</p>
+        <!--       <StartOfInputFormat> DO NOT REMOVE THIS LINE-->
+        
+        <details><summary class="section-title" data-a11y="d-s"><span data-a11y="d-s-t" role="heading" aria-level="4">Input Format For Custom Testing</span></summary>
+        
+        <div class="collapsable-details">
+        <p>The first line contains an integer, <em>n</em>, the number of log entries.</p>
+        
+        <p>The next line contains an integer, <em>2,</em> the number of parameters to describe a log entry.</p>
+        
+        <p>Each line <em>i</em> of the <em>n</em> subsequent lines (where <em>0 ≤ i &lt; n</em>) contains the log entry in the form described above.</p>
+        </div>
+        </details>
+        <!--        </StartOfInputFormat> DO NOT REMOVE THIS LINE-->
+        
+        <details open="open"><summary class="section-title" data-a11y="d-s"><span data-a11y="d-s-t" role="heading" aria-level="4">Sample Case 0</span></summary>
+        
+        <div class="collapsable-details">
+        <p class="section-title" data-a11y="d-p-s-t" role="heading" aria-level="5">Sample Input For Custom Testing</p>
+        
+        <pre>6
+        2
+        1 1
+        2 1
+        3 1
+        4 2
+        5 2
+        6 2</pre>
+        
+        <p class="section-title" data-a11y="d-p-s-t" role="heading" aria-level="5">Sample Output</p>
+        
+        <pre>2</pre>
+        
+        <p class="section-title" data-a11y="d-p-s-t" role="heading" aria-level="5">Explanation</p>
+        
+        <ul>
+            <li>
+        <em>3</em> calls are made for item <em>1,</em> and by time <em>3</em>, since the priority is <em>6,</em> it is moved to the cache. Now its priority decays by <em>1</em> every second till time <em>6 </em>at which it is moved back to the main memory.</li>
+            <li>Similarly, <em>3</em> calls are made for item <em>2,</em> and at time 6 it will be moved to the cache.</li>
+        </ul>
+        </div>
+        </details>
+        
+        <details open=""><summary class="section-title" data-a11y="d-s"><span data-a11y="d-s-t" role="heading" aria-level="4">Sample Case 1</span></summary>
+        
+        <div class="collapsable-details">
+        <p class="section-title" data-a11y="d-p-s-t" role="heading" aria-level="5">Sample Input For Custom Testing</p>
+        
+        <pre>6
+        2
+        1 1
+        2 1
+        3 2
+        4 2
+        5 1
+        6 1</pre>
+        
+        <p class="section-title" data-a11y="d-p-s-t" role="heading" aria-level="5">Sample Output</p>
+        
+        <pre>1</pre>
+        
+        <p class="section-title" data-a11y="d-p-s-t" role="heading" aria-level="5">Explanation</p>
+        
+        <ul>
+            <li>At time <em>1,</em> the priority of <em>1</em> is <em>2.</em>
+        </li>
+            <li>At time<em> 2, </em>the priority of <em>1 </em>is <em>4</em>.</li>
+            <li>At time <em>5, </em>the priority of <em>1</em> is <em>4.</em>
+        </li>
+            <li>At time <em>6,</em> the priority of <em>1</em> is <em>6.</em>
+        </li>
+        </ul>
+        
+        <p>So <em>1</em> will be in the cache just after the last entry. Priority of item <em>2 </em>does not reach <em>5.</em></p>
+        </div>
+        </details>
+        </div>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="ps-content-wrapper-v0">
+        <p>There is a database that contains a website's traffic data over a period of <em>30</em> days. The first table contains users' information including the user type <em>(user, crawler, admin). </em>The second table consists of the time of each visit to the website, the id of the visitor, time spent on the website in seconds. Write an SQL query to show the 3 day moving average of time spent on the website for <em>users.user_type = 'user'.</em></p>
+        
+        <p><strong>Note:</strong> avg time spent must have 4 decimal digits and rounded off (example:<em> 5/3 = 1.6667, 5/2 = 2.5000 and 1/3 = 0.3333)</em></p>
+        
+        <p>&nbsp;</p>
+        
+        <details open=""><summary class="section-title" data-a11y="d-s"><span data-a11y="d-s-t" role="heading" aria-level="4">Schema</span></summary>
+        
+        <div class="collapsable-details">
+        <p>There are 2 tables: <code>users</code>, <code>traffic</code></p>
+        
+        <table class="database-table">
+            <tbody>
+                <tr>
+                    <th colspan="100">users</th>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>Type</td>
+                    <td>Description</td>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>INTEGER</td>
+                    <td class="description">The user's unique id. It is the primary key.</td>
+                </tr>
+                <tr>
+                    <td>name</td>
+                    <td>VARCHAR</td>
+                    <td class="description">This is the second column and the name of the user.</td>
+                </tr>
+                <tr>
+                    <td>user_type</td>
+                    <td>VARCHAR</td>
+                    <td class="description">Type of the user</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table class="database-table">
+            <tbody>
+                <tr>
+                    <th colspan="100">traffic</th>
+                </tr>
+                <tr>
+                    <td>Name</td>
+                    <td>Type</td>
+                    <td>Description</td>
+                </tr>
+                <tr>
+                    <td>user_id</td>
+                    <td>INTEGER</td>
+                    <td class="description">id of the user from the users table.</td>
+                </tr>
+                <tr>
+                    <td>visited_on</td>
+                    <td>DATE</td>
+                    <td class="description">date on which the user visited the website</td>
+                </tr>
+                <tr>
+                    <td>time_spent&nbsp; &nbsp;</td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;INTEGER&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                    <td class="description">time spent on website in seconds</td>
+                </tr>
+            </tbody>
+        </table>
+        </div>
+        </details>
+        
+        <details open=""><summary class="section-title" data-a11y="d-s"><span data-a11y="d-s-t" role="heading" aria-level="4">Sample Data Tables</span></summary>
+        
+        <div class="collapsable-details">
+        <table class="database-table">
+            <tbody>
+                <tr>
+                    <th colspan="100">users</th>
+                </tr>
+                <tr>
+                    <td>id</td>
+                    <td>name</td>
+                    <td>user_type</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Matt</td>
+                    <td>user</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>John</td>
+                    <td>user</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Louis</td>
+                    <td>admin</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <table class="database-table">
+            <tbody>
+                <tr>
+                    <th colspan="101">traffic</th>
+                </tr>
+                <tr>
+                    <td>user_id</td>
+                    <td>visited_on</td>
+                    <td>time_spent</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>2019-05-01</td>
+                    <td>15</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2019-05-02</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>2019-05-03</td>
+                    <td>10</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <p>&nbsp;</p>
+        
+        <p data-a11y="d-p-str" role="heading" aria-level="5"><strong>Output</strong></p>
+        
+        <p>visited_on avg_time_spent</p>
+        
+        <p>2019-05-01 15.0000</p>
+        
+        <p>2019-05-02 17.5000</p>
+        
+        <p>2019-05-03 15.0000</p>
+        
+        <p>&nbsp;</p>
+        
+        <p data-a11y="d-p-str" role="heading" aria-level="5"><strong>Explanation</strong></p>
+        
+        <p>Row 1 : 15/1 = 15.0000</p>
+        
+        <p>Row 2 : (15+20)/2 = 17.5000</p>
+        
+        <p>Row 3 : (15+20+10)/3 = 15.0000</p>
+        </div>
+        </details>
+        </div>
+</body>
+</html>
